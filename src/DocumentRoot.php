@@ -11,7 +11,7 @@ use Amp\Http\Server\ErrorHandler;
 use Amp\Http\Server\Request;
 use Amp\Http\Server\RequestHandler;
 use Amp\Http\Server\Response;
-use Amp\Http\Server\Server;
+use Amp\Http\Server\HttpServer;
 use Amp\Http\Server\ServerObserver;
 use Amp\Http\Status;
 use Amp\Loop;
@@ -703,7 +703,7 @@ final class DocumentRoot implements RequestHandler, ServerObserver
         $this->bufferedFileSizeLimit = $bytes;
     }
 
-    public function onStart(Server $server): Promise
+    public function onStart(HttpServer $server): Promise
     {
         $this->running = true;
 
@@ -725,7 +725,7 @@ final class DocumentRoot implements RequestHandler, ServerObserver
         return new Success;
     }
 
-    public function onStop(Server $server): Promise
+    public function onStop(HttpServer $server): Promise
     {
         $this->cache = [];
         $this->cacheTimeouts = [];
